@@ -1,6 +1,5 @@
 cook_book ={}
 ingredient_book = {}
-len_count = 0
 with open('recipes.txt', encoding='utf8') as f:
     while True:
         dish_name = f.readline().strip()
@@ -30,10 +29,7 @@ def ingredients_dict(dishes, ingredient_book):
 
 def get_shop_list_by_dishes(dishes, person_count):
     ingredient_book = {}
-    if isinstance(dishes, str):
-        ingredients_dict(dishes, ingredient_book)
-    else:
-        for dish in dishes:
+    for dish in dishes:
             ingredients_dict(dish, ingredient_book)
     for keys, values in ingredient_book.items():
            values['quantity'] = int(values['quantity'])*person_count
@@ -43,7 +39,31 @@ def get_shop_list_by_dishes(dishes, person_count):
         for v in values.values():
             print(f'{v}', end = ' ')
         print()
-get_shop_list_by_dishes(['Запеченный картофель','Омлет', 'Фахитос'], 2)
+
+def main():
+    while True:
+        try:
+            dishes = input('Введите список блюд через запятую: ').split(',')
+            print(dishes)
+            person_count = input('Введите количество персон: ')
+            for dish in dishes:
+                assert dish in cook_book.keys()
+                int(person_count)
+        except AssertionError:
+            print('Такого блюда нет в книге рецептов')
+        except ValueError:
+            print('Введите количество персон корректно')
+        else:
+            print()
+            get_shop_list_by_dishes(dishes,  int(person_count))
+            print()
+            y_n = input('Для повторного расчета введите y, для выхода - n: ')
+            if y_n == 'y':
+                continue
+            if y_n == 'n':
+                break
+main()
+
 
 
 
