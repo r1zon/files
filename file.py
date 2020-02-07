@@ -40,27 +40,42 @@ def get_shop_list_by_dishes(dishes, person_count):
             print(f'{v}', end = ' ')
         print()
 
+def book():
+    print('*'*20)
+    print('Книга рецептов\n')
+    for keys, values in cook_book.items():
+        print(f'{keys}: ')
+        for i in values:
+            for k, v in i.items():
+                print(v, end = ' ')
+            print()
+        print()
+    print('*'*20)
 def main():
     while True:
-        try:
-            dishes = input('Введите список блюд через запятую: ').split(',')
-            person_count = input('Введите количество персон: ')
-            for dish in dishes:
-                assert dish in cook_book.keys()
-            int(person_count)
-        except AssertionError:
-            print('Такого блюда нет в книге рецептов')
-        except ValueError:
-            print('Введите количество персон корректно')
-        else:
-            print()
-            get_shop_list_by_dishes(dishes,  int(person_count))
-            print()
-            y_n = input('Для повторного расчета введите y, для выхода - n: ')
-            if y_n == 'y':
-                continue
-            if y_n == 'n':
-                break
+        print_book = input('Чтобы вывести книгу рецептов, нажмите b, для продолжения работы нажмите c: ')
+        if print_book == 'b':
+            book()
+        elif print_book == 'c':
+            try:
+                dishes = input('Введите список блюд через запятую: ').split(',')
+                person_count = input('Введите количество персон: ')
+                for dish in dishes:
+                    assert dish in cook_book.keys()
+                int(person_count)
+            except AssertionError:
+                print('Такого блюда нет в книге рецептов')
+            except ValueError:
+                print('Введите количество персон корректно')
+            else:
+                print()
+                get_shop_list_by_dishes(dishes,  int(person_count))
+                print()
+                y_n = input('Для повторного расчета введите y, для выхода - n: ')
+                if y_n == 'y':
+                    continue
+                if y_n == 'n':
+                    break
 main()
 
 
