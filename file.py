@@ -44,11 +44,10 @@ def main():
     while True:
         try:
             dishes = input('Введите список блюд через запятую: ').split(',')
-            print(dishes)
             person_count = input('Введите количество персон: ')
             for dish in dishes:
                 assert dish in cook_book.keys()
-                int(person_count)
+            int(person_count)
         except AssertionError:
             print('Такого блюда нет в книге рецептов')
         except ValueError:
